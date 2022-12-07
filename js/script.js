@@ -105,7 +105,7 @@ $(".nv-start").click(function(){
         $(".selection").hide();
         // $(".container").show();
         $(".r").css("height", "0px");
-        $("page-center").removeClass("full-size");
+        $(".page-center").removeClass("full-size");
 
         console.log(arr);
         // generateBars(arr);
@@ -167,7 +167,7 @@ $("home").click(function(){
     $(".selection").show();
     $("container").hide();
     $(".after-sort").hide();
-    $("page-center").addClass("full-size");
+    $(".page-center").addClass("full-size");
 });
 
 
