@@ -172,7 +172,7 @@ $("home").click(function(){
 
 async function sort(){
 
-    const start = Date.now;
+    const start = Date.now();
 
     switch(selected_algo){
         case "Selection Sort":
@@ -213,7 +213,7 @@ async function sort(){
             break;
     }
 
-    const end = Date.now;
+    const end = Date.now();
 
     arr.sort(function(a, b){return a-b;});
     console.log(arr);
@@ -224,7 +224,7 @@ async function sort(){
     });
     $(".array").html(sorted);
 
-    $("#time").html(`${end - start}`);
+    $("#time").html(`${end - start} ms`);
 
     $(".after-sort").show();
 
@@ -233,7 +233,7 @@ async function sort(){
 
 async function nv_sort(){
 
-    const start = Date.now;
+    const start = Date.now();
 
     switch(selected_algo){
         case "Bubble Sort":
@@ -270,7 +270,7 @@ async function nv_sort(){
             break;
     }
 
-    const end = Date.now;
+    const end = Date.now();
 
     // arr.sort(function(a, b){return a-b;});
     // console.log(arr);
@@ -281,7 +281,9 @@ async function nv_sort(){
     });
     $(".array").html(sorted);
 
-    $("#time").html(`${end - start}`);
+    $("#time").html(`${end - start} ms`);
+    console.log(start);
+    console.log(end);
 
     $(".after-sort").show();
 

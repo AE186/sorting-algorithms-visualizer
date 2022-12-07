@@ -98,35 +98,37 @@ async function nv_BubbleSort() {
 // INSERTION SORT
 
 // InsertionSort() : Implementation of inserion sort algorithm. O(n^2) 
-async function InsertionSort() {
-	let delay = Disable_The_Input();
-	let container = document.getElementById("container");
-	for (let i = 1; i < bars.length; i++) {
+async function nv_InsertionSort() {
+	// let delay = Disable_The_Input();
+	// let container = document.getElementById("container");
+
+	for (let i = 1; i < arr.length; i++) {
 		let j = i - 1;
-		let key = bars[i];
-		let curr_id = key.split('id="')[1].split('"')[0];
-		let nxt_ele = bars[j].split('id="')[1].split('"')[0];
-		document.getElementById(curr_id).style.backgroundColor = selected;
-		let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
-		beep(100, sound, delay)
-		while (j >= 0 && parseInt(bars[j].split(/[:%]/)[1]) > parseInt(key.split(/[:%]/)[1])) {
-			document.getElementById(nxt_ele).style.backgroundColor = def;
-			nxt_ele = bars[j].split('id="')[1].split('"')[0];
-			document.getElementById(nxt_ele).style.backgroundColor = chng;
-			await Sleep(delay);
-			bars[j + 1] = bars[j];
+		let key = arr[i];
+		// let curr_id = key.split('id="')[1].split('"')[0];
+		// let nxt_ele = bars[j].split('id="')[1].split('"')[0];
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, delay)
+
+		while (j >= 0 && parseInt(arr[j]) > parseInt(key)) {
+			// document.getElementById(nxt_ele).style.backgroundColor = def;
+			// nxt_ele = bars[j].split('id="')[1].split('"')[0];
+			// document.getElementById(nxt_ele).style.backgroundColor = chng;
+			// await Sleep(delay);
+			arr[j + 1] = arr[j];
 			j--;
 		}
 
-		bars[j + 1] = key;
-		container.innerHTML = bars.join('');
-		document.getElementById(curr_id).style.backgroundColor = selected;
-		document.getElementById(nxt_ele).style.backgroundColor = chng;
-		await Sleep(delay * 3.0 / 5);
-		document.getElementById(curr_id).style.backgroundColor = def;
-		document.getElementById(nxt_ele).style.backgroundColor = def;
+		arr[j + 1] = key;
+		// container.innerHTML = bars.join('');
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// document.getElementById(nxt_ele).style.backgroundColor = chng;
+		// await Sleep(delay * 3.0 / 5);
+		// document.getElementById(curr_id).style.backgroundColor = def;
+		// document.getElementById(nxt_ele).style.backgroundColor = def;
 	}
-	Finished_Sorting();
+	// Finished_Sorting();
 }
 
 
@@ -134,62 +136,62 @@ async function InsertionSort() {
 // 4
 // MERGE SORT
 // Slide_down() : Places bars[r] at lth position by sliding other bars to the right. 
-function Slide_down(l, r) {
-	let temp = bars[r];
+function nv_Slide_down(l, r) {
+	let temp = arr[r];
 	for (let i = r - 1; i >= l; i--) {
-		bars[i + 1] = bars[i];
+		arr[i + 1] = arr[i];
 	}
-	bars[l] = temp;
+	arr[l] = temp;
 }
 
 
-async function merge(l, m, r, d) {
+async function nv_merge(l, m, r, d) {
 	let y = l;
 	let i = l;
 	let j = m + 1;
 
 	while (i < j && j <= r) {
-		let curr_id = bars[j].split('id="')[1].split('"')[0];
-		let nxt_ele = bars[i].split('id="')[1].split('"')[0];
-		document.getElementById(curr_id).style.backgroundColor = selected;
-		document.getElementById(nxt_ele).style.backgroundColor = chng;
-		let a = parseInt(bars[j].split(/[:%]/)[1]);
-		let b = parseInt(bars[i].split(/[:%]/)[1]);
+		// let curr_id = bars[j].split('id="')[1].split('"')[0];
+		// let nxt_ele = bars[i].split('id="')[1].split('"')[0];
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// document.getElementById(nxt_ele).style.backgroundColor = chng;
+		let a = parseInt(arr[j]);
+		let b = parseInt(arr[i]);
 
 		if (a > b) i++;
 		else {
-			Slide_down(i, j);
+			nv_Slide_down(i, j);
 			i++; j++;
 		}
-		await Sleep(d / 2.0);
-		container.innerHTML = bars.join('');
-		document.getElementById(curr_id).style.backgroundColor = selected;
-		document.getElementById(nxt_ele).style.backgroundColor = chng;
-		let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
-		beep(100, sound, d)
-		await Sleep(d / 2.0);
-		document.getElementById(curr_id).style.backgroundColor = def;
-		document.getElementById(nxt_ele).style.backgroundColor = def;
-		sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
-		beep(100, sound, d)
+		// await Sleep(d / 2.0);
+		// container.innerHTML = bars.join('');
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// document.getElementById(nxt_ele).style.backgroundColor = chng;
+		// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, d)
+		// await Sleep(d / 2.0);
+		// document.getElementById(curr_id).style.backgroundColor = def;
+		// document.getElementById(nxt_ele).style.backgroundColor = def;
+		// sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, d)
 	}
 }
 
 
-async function mergeSort(l, r, d) {
+async function nv_mergeSort(l, r, d) {
 	if (l < r) {
 		let m = parseInt(l + (r - l) / 2);
-		await mergeSort(l, m, d);
-		await mergeSort(m + 1, r, d);
-		await merge(l, m, r, d);
+		await nv_mergeSort(l, m, d);
+		await nv_mergeSort(m + 1, r, d);
+		await nv_merge(l, m, r, d);
 	}
 }
 
 
-async function MergeSort() {
-	let delay = Disable_The_Input();
-	await mergeSort(0, bars.length - 1, delay);
-	Finished_Sorting();
+async function nv_MergeSort() {
+	// let delay = Disable_The_Input();
+	await nv_mergeSort(0, arr.length - 1, 0);
+	// Finished_Sorting();
 }
 
 
@@ -198,67 +200,67 @@ async function MergeSort() {
 // 5
 // QUICK SORT
 // Partition(): Places the (r)th bar at the correct position 
-async function Partition(l, r, d) {
+async function nv_Partition(l, r, d) {
 	let i = l - 1;
 	let j = l;
-	let id = bars[r].split('id="')[1].split('"')[0];
-	document.getElementById(id).style.backgroundColor = selected;
+	// let id = bars[r].split('id="')[1].split('"')[0];
+	// document.getElementById(id).style.backgroundColor = selected;
 	for (j = l; j < r; j++) {
-		let a = parseInt(bars[j].split(/[:%]/)[1]);
-		let b = parseInt(bars[r].split(/[:%]/)[1]);
+		let a = parseInt(arr[j]);
+		let b = parseInt(arr[r]);
 		if (a < b) {
 			i++;
-			let curr_id = bars[i].split('id="')[1].split('"')[0];
-			let nxt_ele = bars[j].split('id="')[1].split('"')[0];
-			document.getElementById(curr_id).style.backgroundColor = chng;
-			document.getElementById(nxt_ele).style.backgroundColor = chng;
+			// let curr_id = bars[i].split('id="')[1].split('"')[0];
+			// let nxt_ele = bars[j].split('id="')[1].split('"')[0];
+			// document.getElementById(curr_id).style.backgroundColor = chng;
+			// document.getElementById(nxt_ele).style.backgroundColor = chng;
 
-			let temp = bars[i];
-			bars[i] = bars[j];
-			bars[j] = temp;
+			let temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
 
-			await Sleep(d / 3.0);
-			container.innerHTML = bars.join('');
-			document.getElementById(curr_id).style.backgroundColor = chng;
-			document.getElementById(nxt_ele).style.backgroundColor = chng;
-			document.getElementById(id).style.backgroundColor = selected;
-			let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
-			beep(100, sound, d)
-			await Sleep(d / 3.0)
-			document.getElementById(curr_id).style.backgroundColor = def;
-			document.getElementById(nxt_ele).style.backgroundColor = def;
+			// await Sleep(d / 3.0);
+			// container.innerHTML = bars.join('');
+			// document.getElementById(curr_id).style.backgroundColor = chng;
+			// document.getElementById(nxt_ele).style.backgroundColor = chng;
+			// document.getElementById(id).style.backgroundColor = selected;
+			// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+			// beep(100, sound, d)
+			// await Sleep(d / 3.0)
+			// document.getElementById(curr_id).style.backgroundColor = def;
+			// document.getElementById(nxt_ele).style.backgroundColor = def;
 		}
 	}
 
-	let temp = bars[i + 1];
-	bars[i + 1] = bars[r];
-	bars[r] = temp;
+	let temp = arr[i + 1];
+	arr[i + 1] = arr[r];
+	arr[r] = temp;
 
-	container.innerHTML = bars.join(' ');
-	document.getElementById(id).style.backgroundColor = selected;
-	await Sleep(d / 3.0);
-	document.getElementById(id).style.backgroundColor = def;
+	// container.innerHTML = bars.join(' ');
+	// document.getElementById(id).style.backgroundColor = selected;
+	// await Sleep(d / 3.0);
+	// document.getElementById(id).style.backgroundColor = def;
 	return i + 1;
 }
 
 
-async function quickSort(l, r, d, k=1) {
+async function nv_quickSort(l, r, d, k=1) {
 	if(r-l <= k){
 		return
 	}
 	
 	else if (l < r) {
-		let p = await Partition(l, r, d);
-		await quickSort(l, p - 1, d);
-		await quickSort(p + 1, r, d);
+		let p = await nv_Partition(l, r, d);
+		await nv_quickSort(l, p - 1, d);
+		await nv_quickSort(p + 1, r, d);
 	}
 }
 
 
-async function QuickSort() {
-	let delay = Disable_The_Input();
-	await quickSort(0, bars.length - 1, delay);
-	Finished_Sorting();
+async function nv_QuickSort() {
+	// let delay = Disable_The_Input();
+	await nv_quickSort(0, arr.length - 1, 0);
+	// Finished_Sorting();
 }
 
 
@@ -266,11 +268,11 @@ async function QuickSort() {
 
 // 5.1
 // MODDED QUICK SORT
-async function modded_QuickSort() {
-	let delay = Disable_The_Input();
-	await quickSort(0, bars.length - 1, delay, Math.log2(bars.length));
-	await InsertionSort();
-	Finished_Sorting();
+async function nv_modded_QuickSort() {
+	// let delay = Disable_The_Input();
+	await nv_quickSort(0, arr.length - 1, 0, Math.log2(bars.length));
+	await nv_InsertionSort();
+	// Finished_Sorting();
 }
 
 
@@ -278,60 +280,60 @@ async function modded_QuickSort() {
 // 6
 // HEAP SORT
 // Heapfiy(): Creates a max heap.
-async function Heapfiy(n, i, d) {
+async function nv_Heapfiy(n, i, d) {
 	let largest = i;
 	let l = 2 * i + 1; // lft
 	let r = 2 * i + 2; // rgt
-	let curr_id = bars[i].split('id="')[1].split('"')[0];
-	let nxt_ele;
-	let id3;
+	// let curr_id = bars[i].split('id="')[1].split('"')[0];
+	// let nxt_ele;
+	// let id3;
 
-	document.getElementById(curr_id).style.backgroundColor = selected;
-	if (r < n) {
-		id3 = bars[r].split('id="')[1].split('"')[0];
-		document.getElementById(id3).style.backgroundColor = chng;
-	}
-	if (l < n) {
-		nxt_ele = bars[l].split('id="')[1].split('"')[0];
-		document.getElementById(nxt_ele).style.backgroundColor = chng;
-	}
-	await Sleep(d / 3.0)
-	if (l < n && parseInt(bars[l].split(/[:%]/)[1]) > parseInt(bars[largest].split(/[:%]/)[1]))
+	// document.getElementById(curr_id).style.backgroundColor = selected;
+	// if (r < n) {
+	// 	id3 = bars[r].split('id="')[1].split('"')[0];
+	// 	document.getElementById(id3).style.backgroundColor = chng;
+	// }
+	// if (l < n) {
+	// 	nxt_ele = bars[l].split('id="')[1].split('"')[0];
+	// 	document.getElementById(nxt_ele).style.backgroundColor = chng;
+	// }
+	// await Sleep(d / 3.0)
+	if (l < n && parseInt(arr[l]) > parseInt(arr[largest]))
 		largest = l;
-	if (r < n && parseInt(bars[r].split(/[:%]/)[1]) > parseInt(bars[largest].split(/[:%]/)[1]))
+	if (r < n && parseInt(arr[r] > parseInt(arr[largest])))
 		largest = r;
 
 	if (largest != i) {
-		let t = bars[i]; bars[i] = bars[largest]; bars[largest] = t;
-		container.innerHTML = bars.join(' ');
-		document.getElementById(curr_id).style.backgroundColor = selected;
-		let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
-		beep(100, sound, d)
-		if (r < n) document.getElementById(id3).style.backgroundColor = chng;
-		if (l < n) document.getElementById(nxt_ele).style.backgroundColor = chng;
-		await Sleep(d / 3.0)
-		container.innerHTML = bars.join(' ');
-		await Heapfiy(n, largest, d);
+		let t = arr[i]; arr[i] = arr[largest]; arr[largest] = t;
+		// container.innerHTML = bars.join(' ');
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, d)
+		// if (r < n) document.getElementById(id3).style.backgroundColor = chng;
+		// if (l < n) document.getElementById(nxt_ele).style.backgroundColor = chng;
+		// await Sleep(d / 3.0)
+		// container.innerHTML = bars.join(' ');
+		await nv_Heapfiy(n, largest, d);
 	}
-	container.innerHTML = bars.join(' ');
+	// container.innerHTML = bars.join(' ');
 }
 
 
-async function HeapSort() {
-	let delay = Disable_The_Input();
-	let n = bars.length;
+async function nv_HeapSort() {
+	// let delay = Disable_The_Input();
+	let n = arr.length;
 	for (let i = n / 2 - 1; i >= 0; i--) // Build the heap
-		await Heapfiy(n, i, delay);
+		await nv_Heapfiy(n, i, 0);
 
 	for (let i = n - 1; i >= 0; i--) {
-		let t = bars[0]; // Swaping
-		bars[0] = bars[i];
-		bars[i] = t;
+		let t = arr[0]; // Swaping
+		arr[0] = arr[i];
+		arr[i] = t;
 
-		container.innerHTML = bars.join(' ');
-		await Heapfiy(i, 0, delay);
+		// container.innerHTML = bars.join(' ');
+		await nv_Heapfiy(i, 0, 0);
 	}
-	Finished_Sorting();
+	// Finished_Sorting();
 } 
 
 
@@ -339,12 +341,12 @@ async function HeapSort() {
 // 7
 // COUNT SORT
 
-async function CountSort(){
+async function nv_CountSort(){
 	let max_arr = 9;
 
-		for(let i=0 ; i<bars.length ; i++){
-			if(parseInt(bars[i].split(/[:%]/)[1]) > max_arr){
-				max_arr = parseInt(bars[i].split(/[:%]/)[1]);
+		for(let i=0 ; i<arr.length ; i++){
+			if(parseInt(arr[i]) > max_arr){
+				max_arr = parseInt(arr[i]);
 			}
 		}
 	
@@ -354,40 +356,41 @@ async function CountSort(){
 		count.push(0);
 	}
 
-	for(let i=0 ; i<bars.length ; i++){
-		count[parseInt(bars[i].split(/[:%]/)[1])] += 1;
+	for(let i=0 ; i<arr.length ; i++){
+		count[parseInt(arr[i])] += 1;
 	}
 
 	for(let i=1 ; i<=max_arr ; i++){
 		count[i] = count[i] + count[i-1];
 	}
-	console.log(count);
-	output = Array(bars.length)
-	for(let i=0 ; i<bars.length ; i++){
-		output[count[parseInt(bars[i].split(/[:%]/)[1])]-1] = bars[i];
-		count[parseInt(bars[i].split(/[:%]/)[1])]--;
+	// console.log(count);
+	output = Array(arr.length)
+	for(let i=0 ; i<arr.length ; i++){
+		output[count[parseInt(arr[i])]-1] = arr[i];
+		count[parseInt(arr[i])]--;
 		// console.log(parseInt(bars[i].split(/[:%]/)[1]));
 	}
 	
-	let delay = Disable_The_Input();
-	await Sleep(delay*100);
-	bars = []
+	// let delay = Disable_The_Input();
+	// await Sleep(delay*100);
+	// bars = []
 
+	arr = [];
 	for(let i=0 ; i<output.length ; i++){
-		$(".container").html(bars.join(''));
-		await Sleep(delay*10);
+		// $(".container").html(bars.join(''));
+		// await Sleep(delay*10);
 
-		bars.push(output[i]);
-		$(".container").html(bars.join(''));
-		document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = selected;
+		arr.push(output[i]);
+		// $(".container").html(bars.join(''));
+		// document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = selected;
 		
-		await Sleep(delay*10);
+		// await Sleep(delay*10);
 
-		document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = def;
-		$(".container").html(bars.join(''));
+		// document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = def;
+		// $(".container").html(bars.join(''));
 	}
 
-	Finished_Sorting();
+	// Finished_Sorting();
 
 }
 
@@ -395,8 +398,8 @@ async function CountSort(){
 
 // 8
 // RADIX SORT
-async function cs(d){
-	let n = bars.length;
+async function nv_cs(d){
+	let n = arr.length;
 
 	count = [];
 	for(let i=0 ; i<=9 ; i++){
@@ -404,7 +407,7 @@ async function cs(d){
 	}
 
 	for(let i=0 ; i<n ; i++){
-		count[ Math.floor((parseInt(bars[i].split(/[:%]/)[1])/d % 10)) ] += 1;
+		count[ Math.floor((parseInt(arr[i])/d % 10)) ] += 1;
 	}
 
 	for(let i=1 ; i<=9 ; i++){
@@ -413,48 +416,49 @@ async function cs(d){
 	
 	output = Array(n)
 	for(let i=n-1 ; i>=0 ; i--){
-		output[count[ Math.floor((parseInt(bars[i].split(/[:%]/)[1])/d % 10)) ]-1] = bars[i];
-		count[ Math.floor((parseInt(bars[i].split(/[:%]/)[1])/d % 10)) ]--;
+		output[count[ Math.floor((parseInt(arr[i])/d % 10)) ]-1] = arr[i];
+		count[ Math.floor((parseInt(arr[i])/d % 10)) ]--;
 		// console.log(parseInt(bars[i].split(/[:%]/)[1]));
 	}
 	
-	let delay = Disable_The_Input();
-	bars = []
-	await Sleep(delay*100);
+	// let delay = Disable_The_Input();
+	// bars = []
+	// await Sleep(delay*100);
 
+	arr = []
 	for(let i=0 ; i<n ; i++){
-		$(".container").html(bars.join(''));
-		await Sleep(delay*10);
+		// $(".container").html(bars.join(''));
+		// await Sleep(delay*10);
 
-		bars.push(output[i]);
-		$(".container").html(bars.join(''));
-		document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = selected;
+		arr.push(output[i]);
+		// $(".container").html(bars.join(''));
+		// document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = selected;
 		
-		await Sleep(delay*10);
+		// await Sleep(delay*10);
 
-		document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = def;
-		$(".container").html(bars.join(''));
+		// document.getElementById(bars[i].split('id="')[1].split('"')[0]).style.backgroundColor = def;
+		// $(".container").html(bars.join(''));
 	}
 
 }
 
-async function RadixSort(){
+async function nv_RadixSort(){
 	let max_arr = -1;
 
-	for(let i=0 ; i<bars.length ; i++){
-		if(parseInt(bars[i].split(/[:%]/)[1]) > max_arr){
-			max_arr = parseInt(bars[i].split(/[:%]/)[1]);
+	for(let i=0 ; i<arr.length ; i++){
+		if(parseInt(arr[i]) > max_arr){
+			max_arr = parseInt(arr[i]);
 		}
 	}
 
 
 	for(let i = 1 ; Math.floor(max_arr/i)>0 ; i*=10){
 
-		await cs(i);
-		console.log(i);
-		console.log(bars.length);
+		await nv_cs(i);
+		// console.log(i);
+		// console.log(bars.length);
 
 	}
 
-	Finished_Sorting();
+	// Finished_Sorting();
 }
