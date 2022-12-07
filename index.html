@@ -114,19 +114,23 @@
               Frequency
             </button>
             <a href="#" class="selection btn btn-primary start" rel="noopener noreferrer" style="width: 110px;">Visualize</a>
+            <a href="#" class="selection btn btn-primary nv-start" rel="noopener noreferrer" style="width: 110px;">Sort</a>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="row" style="height: 60vh;">
+        <div class="row r" style="height: 60vh;">
           <div class="container" id="container" style="display: none; height: 100%;"></div>
         </div>
         <div class="row">
           <div class="after-sort text-center array" style="display: none;"></div>
         </div>
         <div class="row">
-          <div class="after-sort text-center" style="display: none;"><div class="text-primary fs-2">Complexity: <div id="complexity" style="display: inline-block;"></div></div></div>
+          <div class="after-sort text-center" style="display: none;">
+            <div class="text-primary fs-2">Complexity: <div id="complexity" style="display: inline-block;"></div></div>
+            <div class="text-primary fs-2">Time: <div id="time" style="display: inline-block;"></div></div>
+          </div>
         </div>
       </div>    
 
@@ -175,6 +179,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
     <script src="js/sort.js"></script>
+    <script src="js/nv_sort.js"></script>
     <script src="js/beep.js"></script>
     <script src="js/frequency.js"></script>
 </body>

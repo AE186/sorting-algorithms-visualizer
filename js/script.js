@@ -86,6 +86,35 @@ $(".start").click(function(){
 });
 
 
+// start sorting no-visualization button 
+$(".nv-start").click(function(){
+
+    if(!algo_inp && !arr_inp){
+        alert("Oh snap! Change a few things up, try selecting a algorithm and inserting a text file");
+    }
+
+    else if(!algo_inp){
+        alert("Oh snap! Change a few things up, try selecting a algorithm");
+    }
+
+    else if(!arr_inp){
+        alert("Oh snap! Change a few things up, try inserting a text file");
+    }
+
+    else{
+        $(".selection").hide();
+        // $(".container").show();
+        $(".r").css("height", "0px")
+
+        console.log(arr);
+        // generateBars(arr);
+
+        nv_sort();
+
+    } 
+
+});
+
 
 $(".freq").click(function(){
 
@@ -143,6 +172,8 @@ $("home").click(function(){
 
 async function sort(){
 
+    const start = Date.now;
+
     switch(selected_algo){
         case "Selection Sort":
             await SelectionSort();
@@ -182,6 +213,8 @@ async function sort(){
             break;
     }
 
+    const end = Date.now;
+
     arr.sort(function(a, b){return a-b;});
     console.log(arr);
 
@@ -190,6 +223,65 @@ async function sort(){
         sorted.push('<div class="array-displayn p-1" style="display: inline-block;">  '+ element +'  </div>');
     });
     $(".array").html(sorted);
+
+    $("#time").html(`${end - start}`);
+
+    $(".after-sort").show();
+
+}
+
+
+async function nv_sort(){
+
+    const start = Date.now;
+
+    switch(selected_algo){
+        case "Bubble Sort":
+            await nv_BubbleSort();
+            $("#complexity").html("O(n<sup>2</sup>)");
+            break;
+        case "Insertion Sort":
+            await nv_InsertionSort();
+            $("#complexity").html("O(n<sup>2</sup>)");
+            break;
+        case "Merge Sort":
+            await nv_MergeSort();
+            $("#complexity").html("O(nlog(n))");
+            break;
+        case "Modified Quick Sort":
+            await nv_modded_QuickSort();
+            $("#complexity").html("O(nlog(n))");
+            break;
+        case "Quick Sort":
+            await nv_QuickSort();
+            $("#complexity").html("O(nlog(n))");
+            break;
+        case "Heap Sort":
+            await nv_HeapSort();
+            $("#complexity").html("O(nlog(n))");
+            break;
+        case "Count Sort":
+            await nv_CountSort();
+            $("#complexity").html("O(n + k)");
+            break;
+        case "Radix Sort":
+            await nv_RadixSort();
+            $("#complexity").html("O(nk)");
+            break;
+    }
+
+    const end = Date.now;
+
+    // arr.sort(function(a, b){return a-b;});
+    // console.log(arr);
+
+    var sorted = []
+    arr.forEach(element => {
+        sorted.push('<div class="array-displayn p-1" style="display: inline-block;">  '+ element +'  </div>');
+    });
+    $(".array").html(sorted);
+
+    $("#time").html(`${end - start}`);
 
     $(".after-sort").show();
 
