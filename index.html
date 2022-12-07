@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/BootsWatch.css">
+    <link rel="stylesheet" href="css/sort.css">
+    <title>Visualize</title>
+
+    <style>
+      /* override browser default */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      /* use viewport-relative units to cover page fully */
+      /* body {
+        height: 100vh;
+        width: 100vw;
+      } */
+
+      /* include border and padding in element width and height */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* full-sized  container that fills up the page */
+      .full-size {
+        height: 100%;
+        width: 100%;
+      }
+
+      .page-center{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+      }
+    </style>
+
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Visualize</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link home" href="index.html">Home
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </li> -->
+            </ul>
+            <!-- <form class="d-flex">
+              <input class="form-control me-sm-2" type="text" placeholder="Search">
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+          </div>
+        </div>
+      </nav>
+    
+    <div class="full-size page-center">
+
+      <div>
+        <div class="selection card border-dark mb-3" style="max-width: 20rem;">
+          <div class="selection card-header">
+            <div class="selection mb-3">
+              <input class="selection form-control" type="file" accept=".txt" id="formFile">
+            </div>
+          </div>
+          <div class="selection card-body text-center">
+            <h4 class="selection card-title">Select Algorithm</h4>
+            <p class="selection card-text">
+              <div class="selection btn-group-vertical">
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Bubble Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Insertion Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Merge Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Heap Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Quick Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Modified Quick Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Count Sort</button>
+                <button type="button" class="selection sort-btn btn btn-outline-primary">Radix Sort</button>
+              </div>
+            </p>
+          </div>
+          <div class="selection card-footer text-muted text-center">
+            <button type="button" class="freq btn btn-primary" data-bs-toggle="modal" data-bs-target="" style="width: 110px;">
+              Frequency
+            </button>
+            <a href="#" class="selection btn btn-primary start" rel="noopener noreferrer" style="width: 110px;">Visualize</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row" style="height: 60vh;">
+          <div class="container" id="container" style="display: none; height: 100%;"></div>
+        </div>
+        <div class="row">
+          <div class="after-sort text-center array" style="display: none;"></div>
+        </div>
+        <div class="row">
+          <div class="after-sort text-center" style="display: none;"><div class="text-primary fs-2">Complexity: <div id="complexity" style="display: inline-block;"></div></div></div>
+        </div>
+      </div>    
+
+    </div>
+
+    <div class="modal" id="Range">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Frequency in Range</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+
+              <div class="form-group">
+                <label class="col-form-label mt-4" for="From">From</label>
+                <input type="number" class="form-control" placeholder="" value="" id="From">
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label mt-4" for="To">To</label>
+                <input type="number" class="form-control" placeholder="" value="" id="To">
+              </div>
+
+              <div class="form-group">
+                <fieldset>
+                  <label class="form-label mt-4" for="frequency">Frequency</label>
+                  <input class="form-control" id="readOnlyInput" type="frequency" placeholder="0" readonly="">
+                </fieldset>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="calc">Calculate</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modalClose">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+    <script src="js/sort.js"></script>
+    <script src="js/beep.js"></script>
+    <script src="js/frequency.js"></script>
+</body>
+</html>
