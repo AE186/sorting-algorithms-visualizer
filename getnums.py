@@ -1,6 +1,6 @@
 import random
 
-file = "sort.txt"
+file = "Big File.txt"
 n = 1000
 start = 0
 end = 85
