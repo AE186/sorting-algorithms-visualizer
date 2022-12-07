@@ -300,7 +300,7 @@ async function nv_Heapfiy(n, i, d) {
 	// await Sleep(d / 3.0)
 	if (l < n && parseInt(arr[l]) > parseInt(arr[largest]))
 		largest = l;
-	if (r < n && parseInt(arr[r] > parseInt(arr[largest])))
+	if (r < n && parseInt(arr[r]) > parseInt(arr[largest]))
 		largest = r;
 
 	if (largest != i) {

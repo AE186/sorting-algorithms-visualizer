@@ -104,7 +104,8 @@ $(".nv-start").click(function(){
     else{
         $(".selection").hide();
         // $(".container").show();
-        $(".r").css("height", "0px")
+        $(".r").css("height", "0px");
+        $("page-center").removeClass("full-size");
 
         console.log(arr);
         // generateBars(arr);
@@ -166,6 +167,7 @@ $("home").click(function(){
     $(".selection").show();
     $("container").hide();
     $(".after-sort").hide();
+    $("page-center").addClass("full-size");
 });
 
 
@@ -282,8 +284,6 @@ async function nv_sort(){
     $(".array").html(sorted);
 
     $("#time").html(`${end - start} ms`);
-    console.log(start);
-    console.log(end);
 
     $(".after-sort").show();
 
