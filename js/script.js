@@ -2,6 +2,7 @@ var selected_algo;
 var arr;
 var count;
 var arr_inp = false, algo_inp = false;
+var buckets = 10;
 
 
 // selecting the algorithm
@@ -269,6 +270,10 @@ async function nv_sort(){
         case "Radix Sort":
             await nv_RadixSort();
             $("#complexity").html("O(nk)");
+            break;
+        case "Bucket Sort":
+            await nv_BucketSort(buckets);
+            $("#complexity").html("O(n + k)");
             break;
     }
 

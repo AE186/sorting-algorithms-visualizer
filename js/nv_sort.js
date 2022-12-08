@@ -462,3 +462,82 @@ async function nv_RadixSort(){
 
 	// Finished_Sorting();
 }
+
+
+
+// 9
+// RADIX SORT
+function nv_ins(arr){
+	// let delay = Disable_The_Input();
+	// let container = document.getElementById("container");
+	console.log(arr);
+
+	for (let i = 1; i < arr.length; i++) {
+		let j = i - 1;
+		let key = arr[i];
+		// let curr_id = key.split('id="')[1].split('"')[0];
+		// let nxt_ele = bars[j].split('id="')[1].split('"')[0];
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, delay)
+
+		while (j >= 0 && parseInt(arr[j]) > parseInt(key)) {
+			// document.getElementById(nxt_ele).style.backgroundColor = def;
+			// nxt_ele = bars[j].split('id="')[1].split('"')[0];
+			// document.getElementById(nxt_ele).style.backgroundColor = chng;
+			// await Sleep(delay);
+			arr[j + 1] = arr[j];
+			j--;
+		}
+
+		arr[j + 1] = key;
+		// container.innerHTML = bars.join('');
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// document.getElementById(nxt_ele).style.backgroundColor = chng;
+		// await Sleep(delay * 3.0 / 5);
+		// document.getElementById(curr_id).style.backgroundColor = def;
+		// document.getElementById(nxt_ele).style.backgroundColor = def;
+	}
+	// Finished_Sorting();
+
+	return arr;
+}
+
+async function nv_BucketSort(buckets){
+	let max = parseInt(arr[0]), min = parseInt(arr[0]);
+
+	for(let i=0 ; i<arr.length ; i++){
+		max = Math.max(max, parseInt(arr[i]));
+		min = Math.min(min, parseInt(arr[i])); 
+	}
+
+	let range = Math.floor((max - min) / buckets);
+
+	let bucket = new Array(buckets);
+	for(let i = 0 ; i<=buckets ; i++){
+		bucket[i] = new Array();
+	}
+
+	for(let i=0 ; i<arr.length ; i++){
+		// console.log(Math.ceil((arr[i] - min) / range));
+		bucket[Math.floor((parseInt(arr[i]) - min) / range)].push(arr[i]);
+	}
+
+	console.log(bucket);
+
+	for(let i=0 ; i<=buckets ; i++){
+		bucket[i] = nv_ins(bucket[i]);
+		console.log(bucket[i]);
+	}
+
+	// console.log(bucket);
+
+	arr = [];
+	for(let i=0 ; i<=buckets ; i++){
+		for(let j = 0 ; j<bucket[i].length ; j++){
+			arr.push(bucket[i][j]);
+		}
+	}
+
+	console.log(arr);
+}
