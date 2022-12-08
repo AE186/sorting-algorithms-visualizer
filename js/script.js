@@ -214,6 +214,10 @@ async function sort(){
             await RadixSort();
             $("#complexity").html("O(nk)");
             break;
+        case "Bucket Sort":
+            await BucketSort(buckets);
+            $("#complexity").html("O(n + k)");
+            break;
     }
 
     const end = Date.now();

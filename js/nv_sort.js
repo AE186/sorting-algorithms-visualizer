@@ -465,7 +465,7 @@ async function nv_RadixSort(){
 
 
 // 9
-// RADIX SORT
+// BUCKET SORT
 function nv_ins(arr){
 	// let delay = Disable_The_Input();
 	// let container = document.getElementById("container");

@@ -24,7 +24,7 @@ function Disable_The_Input() {
 	// for (let i = 0; i < x.length; i++)
 	// 	x[i].disabled = true;
 	// return parseInt(document.getElementById("delay").value);
-	return 5;
+	return 15;
 }
 
 
@@ -514,6 +514,69 @@ async function RadixSort(){
 		console.log(bars.length);
 
 	}
+
+	Finished_Sorting();
+}
+
+
+
+// 9
+// BUCKET SORT
+async function BucketSort(buckets){
+	let delay = Disable_The_Input();
+	await Sleep(delay*60);
+
+	let max = parseInt(bars[0].split(/[:%]/)[1]), min = parseInt(bars[0].split(/[:%]/)[1]);
+
+	for(let i=0 ; i<bars.length ; i++){
+		max = Math.max(max, parseInt(bars[i].split(/[:%]/)[1]));
+		min = Math.min(min, parseInt(bars[i].split(/[:%]/)[1])); 
+	}
+
+	let range = Math.floor((max - min) / buckets);
+
+	let bucket = new Array(buckets - 1);
+	for(let i = 0 ; i<=buckets ; i++){
+		bucket[i] = new Array();
+	}
+
+	for(let i=0 ; i<bars.length ; i++){
+		// console.log(Math.ceil((arr[i] - min) / range));
+		bucket[Math.floor((parseInt(bars[i].split(/[:%]/)[1]) - min) / range)].push(bars[i]);
+	}
+
+	console.log(bucket);
+
+	for(let i=1 ; i<=buckets+1 ; i++){
+		
+		bars = bucket[i-1];
+		console.log(bars);
+		$(".r").html("<h1 class='mx-auto' style='display: block;'>Bucket " + parseInt(i) + "</h1>" + "<div class='container' id='container' style='display: none; height: 100%;'></div>");
+		$(".container").show();
+
+		$(".container").html(bars.join(''));
+
+		await Sleep(delay*20);
+		await InsertionSort();
+		await Sleep(delay*50);
+
+		Finished_Sorting();
+	}
+
+	// console.log(bucket);
+
+	$(".r").html("<div class='container' id='container' style='display: none; height: 100%;'></div>");
+	$(".container").show();
+
+	bars = [];
+	for(let i=0 ; i<=buckets ; i++){
+		for(let j = 0 ; j<bucket[i].length ; j++){
+			bars.push(bucket[i][j]);
+		}
+	}
+
+	console.log(bars);
+	$(".container").html(bars.join(''));
 
 	Finished_Sorting();
 }
