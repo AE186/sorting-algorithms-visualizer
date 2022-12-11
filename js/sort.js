@@ -326,10 +326,73 @@ async function QuickSort() {
 
 // 5.1
 // MODDED QUICK SORT
-async function modded_QuickSort() {
+async function hb_ins(low, high) {
 	let delay = Disable_The_Input();
-	await quickSort(0, bars.length - 1, delay, Math.log2(bars.length));
-	await InsertionSort();
+	let container = document.getElementById("container");
+
+	for (let i = low+1 ; i <= high; i++) {
+		let j = i - 1;
+		let key = bars[i];
+		let curr_id = key.split('id="')[1].split('"')[0];
+		let nxt_ele = bars[j].split('id="')[1].split('"')[0];
+		document.getElementById(curr_id).style.backgroundColor = selected;
+		let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		beep(100, sound, delay)
+
+		while (j >= low && parseInt(parseInt(bars[j].split(/[:%]/)[1])) > parseInt(key.split(/[:%]/)[1])) {
+			document.getElementById(nxt_ele).style.backgroundColor = def;
+			nxt_ele = bars[j].split('id="')[1].split('"')[0];
+			document.getElementById(nxt_ele).style.backgroundColor = chng;
+			await Sleep(delay * 20);
+			bars[j + 1] = bars[j];
+			j--;
+		}
+
+		bars[j + 1] = key;
+		container.innerHTML = bars.join('');
+		document.getElementById(curr_id).style.backgroundColor = selected;
+		document.getElementById(nxt_ele).style.backgroundColor = chng;
+		await Sleep(delay * 20);
+		document.getElementById(curr_id).style.backgroundColor = def;
+		document.getElementById(nxt_ele).style.backgroundColor = def;
+	}
+	// Finished_Sorting();
+}
+
+async function hb_quicksort(low, high){
+
+	if(low < high){
+
+		let delay = Disable_The_Input();
+
+		if(high - low < Math.sqrt(arr.length)){
+			await hb_ins(low, high);
+			console.log(arr);
+		}
+
+		else {
+			 let p = await Partition(low, high, 0);
+
+			 if(p - low < high - p){
+			 	await hb_quicksort(low, p-1);
+				await Sleep(delay * 20);
+				await hb_quicksort(p+1, high);
+			 }
+
+			 else{
+			 	await hb_quicksort(p+1, high);
+				 await Sleep(delay * 20);
+				await hb_quicksort(low, p-1);
+			 }
+		}
+
+	}
+
+}
+
+async function modded_QuickSort() {
+	// let delay = Disable_The_Input();
+	await hb_quicksort(0, arr.length - 1);
 	Finished_Sorting();
 }
 

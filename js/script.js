@@ -38,6 +38,7 @@ $("#formFile").change(function(event){
 
         let reader = new FileReader();
         reader.onload = function(fileLoadedEvent){
+            delete(arr);
             let text = fileLoadedEvent.target.result;
             arr = text.split(" ");
         };

@@ -1,7 +1,7 @@
 import random
 
 file = "Big File.txt"
-n = 1000
+n = 100000
 start = 0
 end = 85
 

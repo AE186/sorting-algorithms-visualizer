@@ -244,12 +244,8 @@ async function nv_Partition(l, r, d) {
 }
 
 
-async function nv_quickSort(l, r, d, k=1) {
-	if(r-l <= k){
-		return
-	}
-	
-	else if (l < r) {
+async function nv_quickSort(l, r, d) {
+	if (l < r) {
 		let p = await nv_Partition(l, r, d);
 		await nv_quickSort(l, p - 1, d);
 		await nv_quickSort(p + 1, r, d);
@@ -268,10 +264,71 @@ async function nv_QuickSort() {
 
 // 5.1
 // MODDED QUICK SORT
+async function hybrid_ins(low, high) {
+	// let delay = Disable_The_Input();
+	// let container = document.getElementById("container");
+
+	for (let i = low+1 ; i <= high; i++) {
+		let j = i - 1;
+		let key = arr[i];
+		// let curr_id = key.split('id="')[1].split('"')[0];
+		// let nxt_ele = bars[j].split('id="')[1].split('"')[0];
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// let sound = MapRange(document.getElementById(curr_id).style.height.split('%')[0], 2, 100, 500, 1000);
+		// beep(100, sound, delay)
+
+		while (j >= low && parseInt(arr[j]) > parseInt(key)) {
+			// document.getElementById(nxt_ele).style.backgroundColor = def;
+			// nxt_ele = bars[j].split('id="')[1].split('"')[0];
+			// document.getElementById(nxt_ele).style.backgroundColor = chng;
+			// await Sleep(delay);
+			arr[j + 1] = arr[j];
+			j--;
+		}
+
+		arr[j + 1] = key;
+		// container.innerHTML = bars.join('');
+		// document.getElementById(curr_id).style.backgroundColor = selected;
+		// document.getElementById(nxt_ele).style.backgroundColor = chng;
+		// await Sleep(delay * 3.0 / 5);
+		// document.getElementById(curr_id).style.backgroundColor = def;
+		// document.getElementById(nxt_ele).style.backgroundColor = def;
+	}
+	// Finished_Sorting();
+}
+
+async function hybrid_quicksort(low, high){
+
+	if(low < high){
+
+		if(high - low < Math.sqrt(arr.length)){
+			await hybrid_ins(low, high);
+			console.log(arr);
+		}
+
+		else {
+			 let p = await nv_Partition(low, high, 0);
+
+			 if(p - low < high - p){
+			 	await hybrid_quicksort(low, p-1);
+				await hybrid_quicksort(p+1, high);
+			 }
+
+			 else{
+			 	await hybrid_quicksort(p+1, high);
+				await hybrid_quicksort(low, p-1);
+			 }
+		}
+
+	}
+
+}
+
 async function nv_modded_QuickSort() {
 	// let delay = Disable_The_Input();
-	await nv_quickSort(0, arr.length - 1, 0, Math.log2(bars.length));
-	await nv_InsertionSort();
+	
+	await hybrid_quicksort(0, arr.length - 1);
+
 	// Finished_Sorting();
 }
 
